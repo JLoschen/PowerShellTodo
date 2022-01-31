@@ -22,7 +22,7 @@ function get-jltodoNames {
         #Write-Host $file
     }
 }
-get-jltodoNames
+#get-jltodoNames
 #get-jltodo "Josh test"
 
 #get the TODO items
@@ -119,11 +119,25 @@ function get-jlpassword{
 
     return "$first$second$third$fourth$fifth"
 }
-
 #get-jlpassword 
 
-<#function read-jlpassword{
+function set-jldone {
     [CmdletBinding()]
-    param()
+    param([string] $fileName, 
+          [string] $id)
 
-}#>
+    $content = Get-Content $fileName 
+
+
+    $doneIndex = $content.IndexOf("---Done---");
+    $idIndex = $content.IndexOf($id);
+
+    foreach($line in $content){
+    #work here when getting back into this
+
+    }
+
+    Write-Host "$doneIndex $idIndex $id"
+}
+
+set-jldone "C:\Users\Josh\Documents\Menards\2022\Powershell\To Do tracker\To Do Tracker.todo" "zerp8"
