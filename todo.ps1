@@ -19,9 +19,10 @@ function get-jltodoNames {
         foreach($todoItem in $test){
             Write-Output $todoItem
         }
+        #Write-Host $file
     }
 }
-
+get-jltodoNames
 #get-jltodo "Josh test"
 
 #get the TODO items
@@ -29,11 +30,18 @@ function get-jltodo{
     [CmdletBinding()]
     param([string] $fileName)
 
+    Write-Output "getting file $fileName"
+
     $content = Get-Content $fileName 
+    
+    $todoItems = @()
+    if($content -eq $null){
+        Write-Host "Probwem"
+        return $todoItems
+    }
 
     $doneIndex = $content.IndexOf("---Done---");
 
-    $todoItems = @()
     for($index = 0;$index -lt $doneIndex; $index++)
     {
         $line = $content[$index]
